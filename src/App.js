@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { SignUpForm } from './TeamSignUp';
+import SignUpForm from './TeamSignUp';
 
 class App extends Component {
   render() {
