@@ -112,7 +112,7 @@ class EmailInput extends React.Component {
   render() {
     var errors = this.validate(this.props.value); //need to validate again, but at least isolated
     var inputStyle = 'form-group';
-    if(!errors.isValid) inputStyle += ' invalid'; //add styling rule
+    if(!errors.isValid) inputStyle += ' has-error'; //add styling rule
 
     return (
       <div className={inputStyle}>
@@ -165,7 +165,7 @@ class RequiredInput extends React.Component {
   render() {
     var errors = this.validate(this.props.value); //need to validate again, but at least isolated
     var inputStyle = 'form-group';
-    if(!errors.isValid) inputStyle += ' invalid';
+    if(!errors.isValid) inputStyle += ' has-error';
 
     return (
       <div className={inputStyle}>
@@ -227,7 +227,7 @@ class BirthdayInput extends React.Component {
   render() {
     var errors = this.validate(this.props.value); //need to validate again, but at least isolated
     var inputStyle = 'form-group';
-    if(!errors.isValid) inputStyle += ' invalid';
+    if(!errors.isValid) inputStyle += ' has-error';
 
     return (
       <div className={inputStyle}>
@@ -281,7 +281,7 @@ class PasswordConfirmationInput extends React.Component {
   render() {
     var errors = this.validate(this.props.value); //need to validate again, but at least isolated
     var inputStyle = 'form-group';
-    if(!errors.isValid) inputStyle += ' invalid';
+    if(!errors.isValid) inputStyle += ' has-error';
 
     return (
       <div className={inputStyle}>
