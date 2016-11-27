@@ -17,6 +17,12 @@ class SignUpForm extends React.Component {
       this.updateState = this.updateState.bind(this); //bind for scope
    }
 
+	validate(currentValue) {
+      if (currentValue === '') { //check presence
+         return { missing: true, isValid: false }
+      }
+	}
+
    //callback for updating the state with child information
    updateState(stateChange) {
       this.setState(stateChange);
@@ -58,14 +64,13 @@ class SignUpForm extends React.Component {
                updateParent={this.updateState} />
 
             <BirthdayInput value={this.state.dob.value} updateParent={this.updateState} />
-
-            <RequiredInput
-               id="password" field="password" type="password"
-               label="Password" for="password" placeholder=""
-               errorMessage="your password can't be blank"
-               value={this.state.password.value}
-               updateParent={this.updateState} requi/>
-
+				
+				<RequiredInput
+					id="password" field="password" type="password"
+					label="Password" for="password" placeholder=""
+					errorMessage={!this.state.password.valid && "your password can't be blank"}
+					value={this.state.password.value}
+					updateParent={this.updateState} required/>
 
             <PasswordConfirmationInput value={this.state.passwordConf.value} password={this.state.password.value} updateParent={this.updateState} />
 

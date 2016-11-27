@@ -50,7 +50,7 @@ describe('<SignUpForm />', () => {
 
       it('should show an error message if passwords do not match', () => {
          password.simulate('change', {target:{value:"Hello"}});
-         passwordConf.simulate('change', {target:{value:"hello"}});
+         passwordConf.simulate('change', {target:{value:"HeloItsMe"}});
          expect(wrapper.contains(<p className="help-block error-mismatched">passwords don't match</p>)).toEqual(true);
       });
 
