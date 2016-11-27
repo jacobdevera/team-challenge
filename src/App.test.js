@@ -14,6 +14,7 @@ describe('<SignUpForm />', () => {
 
    describe('<EmailInput />', () => {
       const email = wrapper.find('#email');
+
       it('should show an error message specific to leaving the field blank', () => {
          email.simulate('change', {target:{value:''}});
          expect(wrapper.contains(<p className="help-block error-missing">we need to know your email address</p>)).toEqual(true);
@@ -36,6 +37,29 @@ describe('<SignUpForm />', () => {
          expect(wrapper.state('email')).toEqual({ valid: false, value: 'change'});
       });
 
+   });
+
+   describe('reset button', () => {
+      const reset = wrapper.find('#resetButton');
+      it('should clear out all fields on click', () => {
+         wrapper.setState({
+            email: { value: 'email@domain.com', valid: true },
+            name: { value: 'John', valid: true },
+            dob: { value: '', valid: false },
+            password: { value: 'password', valid: true },
+            passwordConf: { value: 'password', valid: true }
+         });
+         reset.simulate('click');
+         expect(wrapper.state()).toEqual(
+            {
+               email: { value: '', valid: false },
+               name: { value: '', valid: false },
+               dob: { value: '', valid: false },
+               password: { value: '', valid: false },
+               passwordConf: { value: '', valid: false }
+            }
+         );
+      });
    });
 
 })
