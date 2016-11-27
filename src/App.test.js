@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { shallow, mount } from 'enzyme';
-import SignUpForm, { EmailInput } from './TeamSignUp';
+import SignUpForm, { EmailInput, PasswordConfirmationInput } from './TeamSignUp';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
@@ -37,6 +37,28 @@ describe('<SignUpForm />', () => {
          expect(wrapper.state('email')).toEqual({ valid: false, value: 'change'});
       });
 
+   });
+
+    describe('<PasswordConfirmationInput />', () => {
+      const passwordConf = wrapper.find('#passwordConf');
+      const password = wrapper.find('#password');
+
+      it('should show an error message specific to leaving the field blank', () => {
+         passwordConf.simulate('change', {target:{value:''}});
+         expect(wrapper.contains(<p className="help-block error-mismatched">passwords don't match</p>)).toEqual(true);
+      });
+
+      it('should show an error message if passwords do not match', () => {
+         password.simulate('change', {target:{value:"Hello"}});
+         passwordConf.simulate('change', {target:{value:"hello"}});
+         expect(wrapper.contains(<p className="help-block error-mismatched">passwords don't match</p>)).toEqual(true);
+      });
+
+      it('should not show an error message if passwords match', () => {
+         password.simulate('change', {target:{value:"husky"}});
+         passwordConf.simulate('change', {target:{value:"husky"}});
+         expect(wrapper.contains(<p className="help-block error-mismatched">passwords don't match</p>)).toEqual(false);
+      });
    });
 
    describe('reset button', () => {

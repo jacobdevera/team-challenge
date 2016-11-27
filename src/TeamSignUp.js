@@ -61,10 +61,11 @@ class SignUpForm extends React.Component {
 
             <RequiredInput
                id="password" field="password" type="password"
-               label="Password" placeholder=""
+               label="Password" for="password" placeholder=""
                errorMessage="your password can't be blank"
                value={this.state.password.value}
-               updateParent={this.updateState} />
+               updateParent={this.updateState} requi/>
+
 
             <PasswordConfirmationInput value={this.state.passwordConf.value} password={this.state.password.value} updateParent={this.updateState} />
 
@@ -261,11 +262,14 @@ class BirthdayInput extends React.Component {
  */
 class PasswordConfirmationInput extends React.Component {
    validate(currentValue) {
-      if (currentValue === '' || this.props.password === '') { //check both entries
-         return { mismatched: true, isValid: false };
+      if (currentValue === '' || this.props.password === '') { //check both entries 
+            return { mismatched: true, isValid: false };
       }
-
-      return { isValid: true }; //no errors
+      if (currentValue !== this.props.password) {
+          return { mismatched: true, isValid: false };
+      }
+    
+        return { isValid: true }; //no errors
    }
 
    handleChange(event) {
@@ -274,7 +278,7 @@ class PasswordConfirmationInput extends React.Component {
 
       //what to assign to parent's state
       var stateUpdate = {
-         'passConf': {
+         'passwordConf': {
             value: event.target.value,
             valid: isValid
          }
