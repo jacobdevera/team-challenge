@@ -39,6 +39,24 @@ describe('<SignUpForm />', () => {
 
    });
 
+    describe('<BirthdayInput />', () => {
+        const dob = wrapper.find('#dob');
+
+        it('should show an error message specific to leaving the field blank', () => {
+          dob.simulate('change', {target:{value:''}});
+          expect(wrapper.contains(<p className="help-block error-missing">we need to know your birthdate</p>)).toEqual(true);
+      });
+        it('should show an error message when the input value is in an invalid format', () => {
+          dob.simulate('change', {target:{value:'11282016'}});
+          expect(wrapper.contains(<p className="help-block error-invalid">that isn't a valid date</p>)).toEqual(true);
+        });
+        it('should show an error message when the difference between input value and current date is less than 13 years', () => {
+          dob.simulate('change', {target:{value:'11/28/2016'}});
+          expect(wrapper.contains(<p className="help-block error-not-old">sorry, you must be at least 13 to sign up</p>)).toEqual(true);
+        });
+
+    });
+
     describe('<PasswordConfirmationInput />', () => {
       const passwordConf = wrapper.find('#passwordConf');
       const password = wrapper.find('#password');
