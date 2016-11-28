@@ -41,17 +41,23 @@ describe('<SignUpForm />', () => {
 
    describe('<RequiredInput />', () => {
       const name = wrapper.find('#name');
+      const pass = wrapper.find('#password');
 
       it('should show an error message if field is left blank', () => {
         name.simulate('change', {target:{value:''}});
         expect(wrapper.contains(<p className="help-block error-missing">we need to know your name</p>)).toEqual(true);
+        pass.simulate('change', {target:{value:''}});
+        expect(wrapper.contains(<p className="help-block error-missing">your password can't be blank</p>)).toEqual(true);
       });
       
       it('should not show an error message if field is not blank', () => {
         name.simulate('change', {target:{value:'Joel'}});
         expect(wrapper.contains(<p className="help-block error-missing">we need to know your name</p>)).toEqual(false);
+        pass.simulate('change', {target:{value:'Ross'}});
+        expect(wrapper.contains(<p className="help-block error-missing">your password can't be blank</p>)).toEqual(false);
       });
 
+    
    });
 
     describe('<BirthdayInput />', () => {
@@ -76,9 +82,9 @@ describe('<SignUpForm />', () => {
       const passwordConf = wrapper.find('#passwordConf');
       const password = wrapper.find('#password');
 
-      it('should show an error message specific to leaving the field blank', () => {
+      it('should not show an error message specific to leaving the field blank', () => {
          passwordConf.simulate('change', {target:{value:''}});
-         expect(wrapper.contains(<p className="help-block error-mismatched">passwords don't match</p>)).toEqual(true);
+         expect(wrapper.contains(<p className="help-block error-mismatched">passwords don't match</p>)).toEqual(false);
       });
 
       it('should show an error message if passwords do not match', () => {

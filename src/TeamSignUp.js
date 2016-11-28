@@ -269,7 +269,7 @@ class BirthdayInput extends React.Component {
 class PasswordConfirmationInput extends React.Component {
    validate(currentValue) {
       if (currentValue === '' || this.props.password === '') { //check both entries 
-            return { mismatched: true, isValid: false };
+            return { isValid: false };
       }
       if (currentValue !== this.props.password) {
           return { mismatched: true, isValid: false };
@@ -296,7 +296,7 @@ class PasswordConfirmationInput extends React.Component {
    render() {
       var errors = this.validate(this.props.value); //need to validate again, but at least isolated
       var inputStyle = 'form-group';
-      if (!errors.isValid) inputStyle += ' has-error';
+      if (errors.mismatched) inputStyle += ' has-error';
 
       return (
          <div className={inputStyle}>
