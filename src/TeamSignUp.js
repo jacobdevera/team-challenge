@@ -53,7 +53,7 @@ class SignUpForm extends React.Component {
 
       return (
          <form name="signupForm" onSubmit={(e) => this.handleSubmit(e)}>
-
+            
             <EmailInput value={this.state.email.value} updateParent={this.updateState} />
 
             <RequiredInput
