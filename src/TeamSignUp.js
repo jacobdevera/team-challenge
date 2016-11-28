@@ -59,9 +59,9 @@ class SignUpForm extends React.Component {
             <RequiredInput
                id="name" field="name" type="text"
                label="Name" placeholder="your name"
-               errorMessage="we need to know your name"
+               errorMessage={!this.state.name.valid && "we need to know your name"}
                value={this.state.name.value}
-               updateParent={this.updateState} />
+               updateParent={this.updateState} required/>
 
             <BirthdayInput value={this.state.dob.value} updateParent={this.updateState} />
 				

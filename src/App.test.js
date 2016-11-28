@@ -39,6 +39,21 @@ describe('<SignUpForm />', () => {
 
    });
 
+   describe('<RequiredInput />', () => {
+      const name = wrapper.find('#name');
+
+      it('should show an error message if field is left blank', () => {
+        name.simulate('change', {target:{value:''}});
+        expect(wrapper.contains(<p className="help-block error-missing">we need to know your name</p>)).toEqual(true);
+      });
+      
+      it('should not show an error message if field is not blank', () => {
+        name.simulate('change', {target:{value:'Joel'}});
+        expect(wrapper.contains(<p className="help-block error-missing">we need to know your name</p>)).toEqual(false);
+      });
+
+   });
+
     describe('<BirthdayInput />', () => {
         const dob = wrapper.find('#dob');
 
