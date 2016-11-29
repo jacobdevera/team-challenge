@@ -37,7 +37,6 @@ describe('<SignUpForm />', () => {
          email.simulate('change', {target:{value:'change'}});
          expect(wrapper.state('email')).toEqual({ valid: false, value: 'change'});
       });
-
    });
 
    describe('<RequiredInput />', () => {
@@ -57,8 +56,6 @@ describe('<SignUpForm />', () => {
         pass.simulate('change', {target:{value:'Ross'}});
         expect(wrapper.contains(<p className="help-block error-missing">your password can't be blank</p>)).toEqual(false);
       });
-
-    
    });
 
     describe('<BirthdayInput />', () => {
@@ -76,7 +73,6 @@ describe('<SignUpForm />', () => {
           dob.simulate('change', {target:{value:'11/28/2016'}});
           expect(wrapper.contains(<p className="help-block error-not-old">sorry, you must be at least 13 to sign up</p>)).toEqual(true);
         });
-
     });
 
     describe('<PasswordConfirmationInput />', () => {
@@ -103,6 +99,7 @@ describe('<SignUpForm />', () => {
 
    describe('reset button', () => {
       const reset = wrapper.find('#resetButton');
+      
       it('should clear out all fields on click', () => {
          wrapper.setState({
             email: { value: 'email@domain.com', valid: true },
@@ -126,6 +123,7 @@ describe('<SignUpForm />', () => {
 
    describe('submit button', () => {
       const form = app.find('form');
+
       it('should show a message confirming the user has submitted the form', () => {
          wrapper.setState({
             email: { value: 'email@domain.com', valid: true },
