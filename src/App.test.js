@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { shallow, mount } from 'enzyme';
+import sinon from 'sinon';
 import SignUpForm, { EmailInput, PasswordConfirmationInput } from './TeamSignUp';
 
 it('renders without crashing', () => {
@@ -10,6 +11,7 @@ it('renders without crashing', () => {
 });
 
 describe('<SignUpForm />', () => {
+   var updateStateSpy = sinon.spy(SignUpForm.prototype, 'updateState');
    const wrapper = mount(<SignUpForm />);
    const app = mount(<App />);
 
@@ -35,6 +37,8 @@ describe('<SignUpForm />', () => {
 
       it('should update the parent state when changed', () => {
          email.simulate('change', {target:{value:'change'}});
+         expect(updateStateSpy.called).toEqual(true);
+         expect(updateStateSpy.getCall(3).args[0]).toEqual({ email: { value: 'change', valid: false } })
          expect(wrapper.state('email')).toEqual({ valid: false, value: 'change'});
       });
    });
@@ -99,7 +103,7 @@ describe('<SignUpForm />', () => {
 
    describe('reset button', () => {
       const reset = wrapper.find('#resetButton');
-      
+
       it('should clear out all fields on click', () => {
          wrapper.setState({
             email: { value: 'email@domain.com', valid: true },
