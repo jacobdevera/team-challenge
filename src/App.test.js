@@ -11,6 +11,7 @@ it('renders without crashing', () => {
 
 describe('<SignUpForm />', () => {
    const wrapper = mount(<SignUpForm />);
+   const app = mount(<App />);
 
    describe('<EmailInput />', () => {
       const email = wrapper.find('#email');
@@ -123,4 +124,18 @@ describe('<SignUpForm />', () => {
       });
    });
 
+   describe('submit button', () => {
+      const form = app.find('form');
+      it('should show a message confirming the user has submitted the form', () => {
+         wrapper.setState({
+            email: { value: 'email@domain.com', valid: true },
+            name: { value: 'John', valid: true },
+            dob: { value: '12/12/1990', valid: true },
+            password: { value: 'password', valid: true },
+            passwordConf: { value: 'password', valid: true }
+         });
+         form.simulate('submit');
+         expect(app.contains(<div className="alert alert-success" role="alert">Thanks for signing up!</div>));
+      })
+   });
 })
